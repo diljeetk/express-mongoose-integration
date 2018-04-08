@@ -50,7 +50,7 @@ app.post('/createBook', function(req,res){
     })
 });
 
-
+//method to update book details
 app.put('/book/:id', function(req, res) {
     Book.findOneAndUpdate({
       _id: req.params.id
@@ -66,8 +66,22 @@ app.put('/book/:id', function(req, res) {
     });
   });
 
+//route to delete a book
+app.delete('/book/:id', function(req,res){
+    Book.findOneAndRemove({
+        _id: req.params.id
+    },function(err, response){
+        if(err){
+            res.send("Error deletiing the book ");
+        } else {
+            console.log(response);
+            res.send(response);
+        }
+    })
+});
+
 app.get('/', function(req,res){
-    res.send('Happy to be here')
+    res.send('Happy to be here');
 });
 
 app.get('/books', function(req,res){

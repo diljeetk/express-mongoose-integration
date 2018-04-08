@@ -48,7 +48,23 @@ app.post('/createBook', function(req,res){
             res.send(book);
         }
     })
-})
+});
+
+
+app.put('/book/:id', function(req, res) {
+    Book.findOneAndUpdate({
+      _id: req.params.id
+      },
+      { $set: { title: req.body.title }
+    }, {upsert: true}, function(err, newBook) {
+      if (err) {
+        res.send('error updating  book details');
+      } else {
+        console.log(newBook);
+        res.send(newBook);
+      }
+    });
+  });
 
 app.get('/', function(req,res){
     res.send('Happy to be here')

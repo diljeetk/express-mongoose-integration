@@ -5,8 +5,14 @@ var mongoose=require('mongoose');
 var Book = require('./Book.model');
 var port =8080;
 
-//set variable for db
+app.use(log);
+function log(req, res, next) {
+    console.log(new Date(), req.method, req.url);
+    next();
+  }
+  
 
+//set variable for db
 var db ='mongodb://localhost/example';
 
 //connecting to database
